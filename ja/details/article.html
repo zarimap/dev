@@ -11,10 +11,11 @@
             background-color: #ddd;
             background-size: cover; background-position: center;
             border-radius: 12px; margin-bottom: 20px;
+            display: none; /* 最初は非表示 */
         }
         .detail-card {
             background: white; padding: 25px;
-            border-radius: 12px; shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 30px;
         }
         .category-tag {
@@ -33,8 +34,6 @@
         .back-link { display: inline-block; margin-top: 20px; color: #e67e22; text-decoration: none; font-weight: bold; }
         .back-link:before { content: "← "; }
         html, body { height: auto !important; overflow: visible !important; }
-        
-        /* 読み込み中の表示 */
         #loading { text-align: center; padding: 50px; font-weight: bold; color: #e67e22; }
     </style>
 </head>
@@ -42,11 +41,11 @@
 
     <header>
         <div class="header-inner">
-            <h1><a href="../index.html" style="color: inherit; text-decoration: none;">ザリマップ <span class="subtitle">詳細情報</span></a></h1>
+            <h1><a href="../../index.html" style="color: inherit; text-decoration: none;">ザリマップ <span class="subtitle">詳細情報</span></a></h1>
             <nav class="header-nav">
                 <ul>
-                    <li><a href="../index.html">マップに戻る</a></li>
-                    <li><a href="post/index.html">情報を投稿</a></li>
+                    <li><a href="../../index.html">マップに戻る</a></li>
+                    <li><a href="../../post/index.html">情報を投稿</a></li>
                 </ul>
             </nav>
         </div>
@@ -56,10 +55,11 @@
         <div id="loading">情報を読み込み中...</div>
         
         <div id="content" style="display: none;">
-            <a href="../ja/map/index.html" class="back-link">マップへ戻る</a>
+            <a href="../../index.html" class="back-link">マップへ戻る</a>
 
             <article class="detail-card">
-                <div class="detail-hero" id="hero-img"></div>
+                <img id="display-photo" src="" class="detail-hero" alt="現地の写真">
+                
                 <span class="category-tag">生息地情報</span>
                 <h2 class="detail-title" id="disp-name">---</h2>
                 <p class="detail-description" id="disp-desc" style="line-height: 1.8; color: #34495e; white-space: pre-wrap;"></p>
@@ -73,61 +73,61 @@
                     <div class="info-value" id="disp-type">---</div>
                 </div>
             </article>
-
-            <section class="detail-card">
-                <h3 style="margin-top: 0;">現地写真</h3>
-                <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px;" id="photo-list">
-                    <p style="color: #ccc;">写真はまだありません</p>
-                </div>
-            </section>
         </div>
     </main>
 
     <script>
         // URLの ?id=0 を取得
         const urlParams = new URLSearchParams(window.location.search);
-        const spotId = parseInt(urlParams.get('id')) || 0;
+        const spotId = parseInt(urlParams.get('id'));
+
+        // IDが数値でない場合は0にする
+        const targetId = isNaN(spotId) ? 0 : spotId;
 
         // CSVの読み込み
         fetch('../../assets/data/zarigani.csv')
-            .then(res => res.text())
+            .then(res => {
+                if (!res.ok) throw new Error('CSVファイルが見つかりません');
+                return res.text();
+            })
             .then(csvData => {
                 const rows = csvData.trim().split('\n');
-                // ヘッダーを除いたデータ行を取得
+                // カンマ区切りでパース（単純なカンマ区切りの場合）
                 const data = rows.slice(1).map(row => row.split(','));
-                const searchQuery = target.pref + target.city; // 「東京都千代田区」
 
-                if (data[spotId]) {
-                    const target = data[spotId];
+                if (data[targetId]) {
+                    const target = data[targetId];
                     
                     // HTML要素に流し込む
-                    document.getElementById('disp-name').innerText = target[0];
-                    document.getElementById('disp-desc').innerText = target[4]; // 日本語
-                    document.getElementById('disp-address').innerText = target[8];
-                    document.getElementById('disp-period').innerText = target[9];
-                    document.getElementById('disp-type').innerText = target[10];
-                    const photoUrl = target[5];
-                    
-                    // タイトルを場所の名前に変更
-                    document.title = target[0] + " - ザリマップ";
+                    document.getElementById('disp-name').innerText = target[0] || "名称なし";
+                    document.getElementById('disp-desc').innerText = target[4] || "説明はありません。";
+                    document.getElementById('disp-address').innerText = target[8] || "不明";
+                    document.getElementById('disp-period').innerText = target[9] || "不明";
+                    document.getElementById('disp-type').innerText = target[10] || "不明";
 
-                    const imgElement = document.getElementById('display-photo'); // HTML上の<img>のID
-if (photoUrl && photoUrl.includes('http')) {
-    imgElement.src = photoUrl;
-    imgElement.style.display = 'block';
-} else {
-    imgElement.style.display = 'none'; // 写真がないときは非表示
-}
+                    // 写真URLの取得（CSVの6列目：インデックス5）
+                    const photoUrl = target[5];
+                    const imgElement = document.getElementById('display-photo');
+
+                    if (photoUrl && photoUrl.trim().startsWith('http')) {
+                        imgElement.src = photoUrl.trim();
+                        imgElement.style.display = 'block'; // 写真があれば表示
+                    } else {
+                        imgElement.style.display = 'none'; // なければ非表示
+                    }
                     
+                    // ブラウザのタイトルを変更
+                    document.title = (target[0] || "スポット詳細") + " - ザリマップ";
+
                     // 読み込み完了後の表示切り替え
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('content').style.display = 'block';
                 } else {
-                    document.getElementById('loading').innerText = "データが見つかりませんでした。";
+                    document.getElementById('loading').innerText = "データ（ID: " + targetId + "）が見つかりませんでした。";
                 }
             })
             .catch(err => {
-                document.getElementById('loading').innerText = "エラーが発生しました。";
+                document.getElementById('loading').innerText = "エラーが発生しました: " + err.message;
                 console.error(err);
             });
     </script>
