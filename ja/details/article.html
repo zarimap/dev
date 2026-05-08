@@ -106,10 +106,19 @@
                     document.getElementById('disp-address').innerText = target[8];
                     document.getElementById('disp-period').innerText = target[9];
                     document.getElementById('disp-type').innerText = target[10];
+                    const photoUrl = target[5];
                     
                     // タイトルを場所の名前に変更
                     document.title = target[0] + " - ザリマップ";
 
+                    const imgElement = document.getElementById('display-photo'); // HTML上の<img>のID
+if (photoUrl && photoUrl.includes('http')) {
+    imgElement.src = photoUrl;
+    imgElement.style.display = 'block';
+} else {
+    imgElement.style.display = 'none'; // 写真がないときは非表示
+}
+                    
                     // 読み込み完了後の表示切り替え
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('content').style.display = 'block';
