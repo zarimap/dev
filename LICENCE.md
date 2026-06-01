@@ -10,7 +10,7 @@ Copyright (c) 2026 Zarimap project All Rights Reserved.
 3. 著作権表示（Copyright）を削除または変更すること。<br><br>
 
 転載、引用、またはデータの利用にあたっては、必ず以下の著作権表示を明記してください。<br>
-"Copyright 2026 Zarimap project All Rights Reserved."
+"Copyright 2026 Zarimap project All Rights Reserved."<br>
 そのような場合は、連絡は不要です。
 
 ----------------------------------------------------------------------
