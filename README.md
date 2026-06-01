@@ -1,7 +1,7 @@
 # ザリマップ/zarimap
 こちらはザリマップのサイトデータを取り扱っております。<br>
 <ul>
-  <li>ライセンスは<a href="LICENCE.md>こちら</a>から</li>
+  <li>ライセンスは<a href="LICENCE.md">こちら</a>から</li>
 </ul>
 
 # ザリマップの使用方法
