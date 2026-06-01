@@ -1,7 +1,7 @@
 Copyright (c) 2026 Zarimap project All Rights Reserved.
 
 # ライセンス
-[日本語]
+[日本語]<br>
 本リポジトリ内のコンテンツ（コード、データ、ドキュメント等を含む）の著作権は、すべて Zarimap project に帰属します。<br><br>
 利用者は、本リポジトリ内のコンテンツをデータとして参照・利用することができます。ただし、以下の行為を厳しく禁止します。<br><br>
 
@@ -14,14 +14,14 @@ Copyright (c) 2026 Zarimap project All Rights Reserved.
 
 ----------------------------------------------------------------------
 # Licence
-[English]
-All copyrights to the contents of this repository (including codes, data, documentation, etc.) belong to Zarimap project.
+[English]<br>
+All copyrights to the contents of this repository (including codes, data, documentation, etc.) belong to Zarimap project.<br><br>
 
-Users are permitted to refer to and utilize the contents as data. However, the following acts are strictly prohibited:
+Users are permitted to refer to and utilize the contents as data. However, the following acts are strictly prohibited:<br><br>
 
-1. Unauthorized reproduction or copying of all or any part of this content.
-2. Modification, adaptation, or creation of derivative works based on this content.
-3. Removal or alteration of the copyright notice.
+1. Unauthorized reproduction or copying of all or any part of this content.<br>
+2. Modification, adaptation, or creation of derivative works based on this content.<br>
+3. Removal or alteration of the copyright notice.<br><br>
 
-When reprinting, quoting, or utilizing the data, you must clearly display the following copyright notice:
+When reprinting, quoting, or utilizing the data, you must clearly display the following copyright notice:<br>
 "Copyright 2026 Zarimap project All Rights Reserved."
