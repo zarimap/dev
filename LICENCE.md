@@ -11,6 +11,7 @@ Copyright (c) 2026 Zarimap project All Rights Reserved.
 
 転載、引用、またはデータの利用にあたっては、必ず以下の著作権表示を明記してください。<br>
 "Copyright 2026 Zarimap project All Rights Reserved."
+そのような場合は、連絡は不要です。
 
 ----------------------------------------------------------------------
 # Licence
@@ -24,4 +25,5 @@ Users are permitted to refer to and utilize the contents as data. However, the f
 3. Removal or alteration of the copyright notice.<br><br>
 
 When reprinting, quoting, or utilizing the data, you must clearly display the following copyright notice:<br>
-"Copyright 2026 Zarimap project All Rights Reserved."
+"Copyright 2026 Zarimap project All Rights Reserved."<br>
+In such a case, you don't need to contact.
